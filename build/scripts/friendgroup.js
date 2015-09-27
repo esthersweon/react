@@ -109,17 +109,24 @@ var Friend = React.createClass({displayName: "Friend",
 var FriendSearch = React.createClass({displayName: "FriendSearch",
   getInitialState: function () {
     return {
-      searchTerm: ""
+      searchTerm: "",
+      filteredFriends: []
     }
   },
   handleTextChange: function (event) {
+    var searchTerm = event.target.value,
+      filteredFriends;
+
+    filteredFriends = this.props.data.filter(function (friend) {
+      return searchTerm && friend.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+
     this.setState({
-      searchTerm: event.target.value
+      searchTerm: searchTerm,
+      filteredFriends: filteredFriends
     });
   },
   render: function () {
-    console.log(this.state.searchTerm);
-
     return (
       React.createElement("div", null, 
         React.createElement("input", {
@@ -128,7 +135,7 @@ var FriendSearch = React.createClass({displayName: "FriendSearch",
           value: this.state.searchTerm, 
           onChange: this.handleTextChange}
         ), 
-        React.createElement(FriendList, {data: this.props.data})
+        React.createElement(FriendList, {data: this.state.filteredFriends})
       )
     );
   }
