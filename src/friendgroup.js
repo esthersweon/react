@@ -66,6 +66,7 @@ var FriendGroupList = React.createClass({
 
       return (
         <FriendGroup
+          id={group.id}
           name={group.name}
           friendsData={this.props.friendsData}
           groupFriendsData={friends}
@@ -89,9 +90,11 @@ var FriendGroup = React.createClass({
       <div>
         <h4>{this.props.name}</h4>
         <FriendSearch
+          groupId={this.props.id}
           data={this.props.friendsData}
           handleAddFriendToGroup={this.props.handleAddFriendToGroup} />
         <FriendList
+          groupId={this.props.id}
           data={this.props.groupFriendsData}
           friendActionName="Remove"
           handleAction={this.props.handleRemoveFriendFromGroup} />
@@ -105,6 +108,8 @@ var FriendList = React.createClass({
     var friendNodes = this.props.data.map(function (friend) {
       return (
         <Friend
+          id={friend.id}
+          groupId={this.props.groupId}
           name={friend.name}
           actionName={this.props.friendActionName}
           handleAction={this.props.handleAction} />
@@ -165,6 +170,7 @@ var FriendSearch = React.createClass({
           value={this.state.searchTerm}
           onChange={this.handleTextChange} />
         <FriendList
+          groupId={this.props.groupId}
           data={this.state.filteredFriends}
           friendActionName="Add"
           handleAction={this.props.handleAddFriendToGroup} />

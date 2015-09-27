@@ -66,6 +66,7 @@ var FriendGroupList = React.createClass({displayName: "FriendGroupList",
 
       return (
         React.createElement(FriendGroup, {
+          id: group.id, 
           name: group.name, 
           friendsData: this.props.friendsData, 
           groupFriendsData: friends, 
@@ -89,9 +90,11 @@ var FriendGroup = React.createClass({displayName: "FriendGroup",
       React.createElement("div", null, 
         React.createElement("h4", null, this.props.name), 
         React.createElement(FriendSearch, {
+          groupId: this.props.id, 
           data: this.props.friendsData, 
           handleAddFriendToGroup: this.props.handleAddFriendToGroup}), 
         React.createElement(FriendList, {
+          groupId: this.props.id, 
           data: this.props.groupFriendsData, 
           friendActionName: "Remove", 
           handleAction: this.props.handleRemoveFriendFromGroup})
@@ -105,6 +108,8 @@ var FriendList = React.createClass({displayName: "FriendList",
     var friendNodes = this.props.data.map(function (friend) {
       return (
         React.createElement(Friend, {
+          id: friend.id, 
+          groupId: this.props.groupId, 
           name: friend.name, 
           actionName: this.props.friendActionName, 
           handleAction: this.props.handleAction})
@@ -165,6 +170,7 @@ var FriendSearch = React.createClass({displayName: "FriendSearch",
           value: this.state.searchTerm, 
           onChange: this.handleTextChange}), 
         React.createElement(FriendList, {
+          groupId: this.props.groupId, 
           data: this.state.filteredFriends, 
           friendActionName: "Add", 
           handleAction: this.props.handleAddFriendToGroup})
