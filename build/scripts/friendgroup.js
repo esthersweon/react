@@ -107,12 +107,27 @@ var Friend = React.createClass({displayName: "Friend",
 });
 
 var FriendSearch = React.createClass({displayName: "FriendSearch",
+  getInitialState: function () {
+    return {
+      searchTerm: ""
+    }
+  },
+  handleTextChange: function (event) {
+    this.setState({
+      searchTerm: event.target.value
+    });
+  },
   render: function () {
-    console.log(this.props.data);
-
+    console.log(this.state.searchTerm);
+    
     return (
       React.createElement("div", null, 
-        React.createElement("input", {type: "text", placeholder: "Search for friends"})
+        React.createElement("input", {
+          type: "text", 
+          placeholder: "Search for friends", 
+          value: this.state.searchTerm, 
+          onChange: this.handleTextChange}
+        )
       )
     );
   }
