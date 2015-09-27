@@ -38,10 +38,36 @@ var FriendGroupBox = React.createClass({displayName: "FriendGroupBox",
     });
   },
   handleAddFriendToGroup: function (groupId, friendId) {
-    console.log(this.props.groupsUrl + "/" + groupId + this.props.friendsUrl + "/" + friendId);
+    var url = this.props.groupsUrl + "/" + groupId + this.props.friendsUrl + "/" + friendId;
+
+    $.ajax({
+      method: 'post',
+      url: url,
+      success: function (data) {
+        this.setState({
+          groupsData: data
+        });
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(url, status, err.toString());
+      }.bind(this)
+    });
   },
   handleRemoveFriendFromGroup: function (groupId, friendId) {
-    console.log(this.props.groupsUrl + "/" + groupId + this.props.friendsUrl + "/" + friendId);
+    var url = this.props.groupsUrl + "/" + groupId + this.props.friendsUrl + "/" + friendId;
+
+    $.ajax({
+      method: 'delete',
+      url: url,
+      success: function (data) {
+        this.setState({
+          groupsData: data
+        });
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(url, status, err.toString());
+      }.bind(this)
+    });
   },
   render: function () {
     return (
