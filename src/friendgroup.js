@@ -72,12 +72,19 @@ var FriendGroupList = React.createClass({
 });
 
 var FriendGroup = React.createClass({
+  handleFriendAction: function () {
+
+  },
   render: function () {
     return (
       <div>
         <h4>{this.props.name}</h4>
-        <FriendSearch data={this.props.friendsData} />
-        <FriendList data={this.props.groupFriendsData} />
+        <FriendSearch
+          data={this.props.friendsData} />
+        <FriendList
+          data={this.props.groupFriendsData}
+          friendActionName="Remove"
+          handlefriendAction={this.handleFriendAction} />
       </div>
     );
   }
@@ -87,9 +94,11 @@ var FriendList = React.createClass({
   render: function () {
     var friendNodes = this.props.data.map(function (friend) {
       return (
-        <Friend name={friend.name} />
+        <Friend
+          name={friend.name}
+          actionName={this.props.friendActionName} />
       );
-    });
+    }.bind(this));
 
     return (
       <ul>
@@ -143,9 +152,11 @@ var FriendSearch = React.createClass({
           type="text"
           placeholder="Search for friends"
           value={this.state.searchTerm}
-          onChange={this.handleTextChange}
-        />
-        <FriendList data={this.state.filteredFriends} />
+          onChange={this.handleTextChange} />
+        <FriendList
+          data={this.state.filteredFriends}
+          friendActionName="Add"
+          handlefriendAction={this.handleFriendAction} />
       </div>
     );
   }

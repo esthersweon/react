@@ -72,12 +72,19 @@ var FriendGroupList = React.createClass({displayName: "FriendGroupList",
 });
 
 var FriendGroup = React.createClass({displayName: "FriendGroup",
+  handleFriendAction: function () {
+
+  },
   render: function () {
     return (
       React.createElement("div", null, 
         React.createElement("h4", null, this.props.name), 
-        React.createElement(FriendSearch, {data: this.props.friendsData}), 
-        React.createElement(FriendList, {data: this.props.groupFriendsData})
+        React.createElement(FriendSearch, {
+          data: this.props.friendsData}), 
+        React.createElement(FriendList, {
+          data: this.props.groupFriendsData, 
+          friendActionName: "Remove", 
+          handlefriendAction: this.handleFriendAction})
       )
     );
   }
@@ -87,9 +94,11 @@ var FriendList = React.createClass({displayName: "FriendList",
   render: function () {
     var friendNodes = this.props.data.map(function (friend) {
       return (
-        React.createElement(Friend, {name: friend.name})
+        React.createElement(Friend, {
+          name: friend.name, 
+          actionName: this.props.friendActionName})
       );
-    });
+    }.bind(this));
 
     return (
       React.createElement("ul", null, 
@@ -143,9 +152,11 @@ var FriendSearch = React.createClass({displayName: "FriendSearch",
           type: "text", 
           placeholder: "Search for friends", 
           value: this.state.searchTerm, 
-          onChange: this.handleTextChange}
-        ), 
-        React.createElement(FriendList, {data: this.state.filteredFriends})
+          onChange: this.handleTextChange}), 
+        React.createElement(FriendList, {
+          data: this.state.filteredFriends, 
+          friendActionName: "Add", 
+          handlefriendAction: this.handleFriendAction})
       )
     );
   }
