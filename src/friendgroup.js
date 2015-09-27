@@ -97,7 +97,7 @@ var FriendGroupBox = React.createClass({
       <div>
         <h2>Friend Group</h2>
 
-        <FriendGroupList />
+        <FriendGroupList groupsData={this.props.groupsData} />
       </div>
     );
   }
@@ -105,6 +105,8 @@ var FriendGroupBox = React.createClass({
 
 var FriendGroupList = React.createClass({
   render: function () {
+    console.log(this.props.groupsData);
+
     return (
       <div>
         <h3>FriendGroups</h3>
@@ -127,6 +129,6 @@ var FriendGroup = React.createClass({
 
 
 React.render(
-  <FriendGroupBox />,
+  <FriendGroupBox groupsData={groups} />,
   document.getElementById('friend-group')
 );

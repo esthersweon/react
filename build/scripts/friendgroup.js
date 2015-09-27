@@ -97,7 +97,7 @@ var FriendGroupBox = React.createClass({displayName: "FriendGroupBox",
       React.createElement("div", null, 
         React.createElement("h2", null, "Friend Group"), 
 
-        React.createElement(FriendGroupList, null)
+        React.createElement(FriendGroupList, {groupsData: this.props.groupsData})
       )
     );
   }
@@ -105,6 +105,8 @@ var FriendGroupBox = React.createClass({displayName: "FriendGroupBox",
 
 var FriendGroupList = React.createClass({displayName: "FriendGroupList",
   render: function () {
+    console.log(this.props.groupsData);
+
     return (
       React.createElement("div", null, 
         React.createElement("h3", null, "FriendGroups"), 
@@ -127,6 +129,6 @@ var FriendGroup = React.createClass({displayName: "FriendGroup",
 
 
 React.render(
-  React.createElement(FriendGroupBox, null),
+  React.createElement(FriendGroupBox, {groupsData: groups}),
   document.getElementById('friend-group')
 );
