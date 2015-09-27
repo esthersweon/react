@@ -95,8 +95,19 @@ var FriendGroupBox = React.createClass({displayName: "FriendGroupBox",
   render: function () {
     return (
       React.createElement("div", null, 
-        React.createElement("h2", null, "Friend Group")
+        React.createElement("h2", null, "Friend Group"), 
 
+        React.createElement(FriendGroupList, null)
+      )
+    );
+  }
+});
+
+var FriendGroupList = React.createClass({displayName: "FriendGroupList",
+  render: function () {
+    return (
+      React.createElement("div", null, 
+        "FriendGroup List"
       )
     );
   }

@@ -97,6 +97,17 @@ var FriendGroupBox = React.createClass({
       <div>
         <h2>Friend Group</h2>
 
+        <FriendGroupList />
+      </div>
+    );
+  }
+});
+
+var FriendGroupList = React.createClass({
+  render: function () {
+    return (
+      <div>
+        FriendGroup List
       </div>
     );
   }
