@@ -55,7 +55,10 @@ var FriendGroupList = React.createClass({
       });
 
       return (
-        <FriendGroup name={group.name} friendsData={friends} />
+        <FriendGroup
+          name={group.name}
+          friendsData={this.props.friendsData}
+          groupFriendsData={friends} />
       )
     }.bind(this));
 
@@ -74,7 +77,7 @@ var FriendGroup = React.createClass({
       <div>
         <h4>{this.props.name}</h4>
         <FriendSearch data={this.props.friendsData} />
-        <FriendList data={this.props.friendsData} />
+        <FriendList data={this.props.groupFriendsData} />
       </div>
     );
   }

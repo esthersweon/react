@@ -55,7 +55,10 @@ var FriendGroupList = React.createClass({displayName: "FriendGroupList",
       });
 
       return (
-        React.createElement(FriendGroup, {name: group.name, friendsData: friends})
+        React.createElement(FriendGroup, {
+          name: group.name, 
+          friendsData: this.props.friendsData, 
+          groupFriendsData: friends})
       )
     }.bind(this));
 
@@ -74,7 +77,7 @@ var FriendGroup = React.createClass({displayName: "FriendGroup",
       React.createElement("div", null, 
         React.createElement("h4", null, this.props.name), 
         React.createElement(FriendSearch, {data: this.props.friendsData}), 
-        React.createElement(FriendList, {data: this.props.friendsData})
+        React.createElement(FriendList, {data: this.props.groupFriendsData})
       )
     );
   }
