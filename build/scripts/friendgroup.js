@@ -126,8 +126,6 @@ var FriendGroupList = React.createClass({displayName: "FriendGroupList",
 
 var FriendGroup = React.createClass({displayName: "FriendGroup",
   render: function () {
-    // console.log(this.props.friendsData);
-
     return (
       React.createElement("div", null, 
         React.createElement("h4", null, this.props.name), 
@@ -139,12 +137,15 @@ var FriendGroup = React.createClass({displayName: "FriendGroup",
 
 var FriendList = React.createClass({displayName: "FriendList",
   render: function () {
-    console.log(this.props.data);
+    var friendNodes = this.props.data.map(function (friend) {
+      return (
+        React.createElement(Friend, {name: friend.name})
+      );
+    });
 
     return (
       React.createElement("ul", null, 
-        React.createElement(Friend, null), 
-        React.createElement(Friend, null)
+        friendNodes
       )
     );
   }
@@ -154,7 +155,7 @@ var Friend = React.createClass({displayName: "Friend",
   render: function () {
     return (
       React.createElement("li", null, 
-        "Friend"
+        this.props.name
       )
     );
   }
