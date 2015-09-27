@@ -73,7 +73,7 @@ var FriendGroup = React.createClass({displayName: "FriendGroup",
     return (
       React.createElement("div", null, 
         React.createElement("h4", null, this.props.name), 
-        React.createElement(FriendSearch, null), 
+        React.createElement(FriendSearch, {data: this.props.friendsData}), 
         React.createElement(FriendList, {data: this.props.friendsData})
       )
     );
@@ -108,6 +108,8 @@ var Friend = React.createClass({displayName: "Friend",
 
 var FriendSearch = React.createClass({displayName: "FriendSearch",
   render: function () {
+    console.log(this.props.data);
+
     return (
       React.createElement("div", null, 
         React.createElement("input", {type: "text", placeholder: "Search for friends"})

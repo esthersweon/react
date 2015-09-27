@@ -73,7 +73,7 @@ var FriendGroup = React.createClass({
     return (
       <div>
         <h4>{this.props.name}</h4>
-        <FriendSearch />
+        <FriendSearch data={this.props.friendsData} />
         <FriendList data={this.props.friendsData} />
       </div>
     );
@@ -108,6 +108,8 @@ var Friend = React.createClass({
 
 var FriendSearch = React.createClass({
   render: function () {
+    console.log(this.props.data);
+
     return (
       <div>
         <input type="text" placeholder="Search for friends" />
