@@ -111,6 +111,13 @@ var FriendGroupList = React.createClass({displayName: "FriendGroupList",
       console.log("this.props.friendsData:");
       console.log(this.props.friendsData);
 
+      var friends = this.props.friendsData.filter(function (friend) {
+        return group.friendIds.indexOf(friend.id) > -1;
+      });
+
+      console.log("Friends");
+      console.log(friends);
+
       return (
         React.createElement(FriendGroup, {name: group.name})
       )
