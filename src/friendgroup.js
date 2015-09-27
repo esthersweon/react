@@ -95,9 +95,14 @@ var FriendGroupBox = React.createClass({
   render: function () {
     return (
       <div>
-        <h2>Friend Group Component</h2>
-        // Group List
+        <h2>Friend Group</h2>
+
       </div>
     );
   }
 });
+
+React.render(
+  <FriendGroupBox />,
+  document.getElementById('friend-group')
+);
