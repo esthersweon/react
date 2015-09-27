@@ -37,11 +37,21 @@ var FriendGroupBox = React.createClass({
       }.bind(this)
     });
   },
+  handleAddFriendToGroup: function (groupId, friendId) {
+    console.log(this.props.groupsUrl + "/" + groupId + this.props.friendsUrl + "/" + friendId);
+  },
+  handleRemoveFriendFromGroup: function (groupId, friendId) {
+    console.log(this.props.groupsUrl + "/" + groupId + this.props.friendsUrl + "/" + friendId);
+  },
   render: function () {
     return (
       <div>
         <h2>Friend Group</h2>
-        <FriendGroupList groupsData={this.state.groupsData} friendsData={this.state.friendsData} />
+        <FriendGroupList
+          groupsData={this.state.groupsData}
+          friendsData={this.state.friendsData}
+          handleAddFriendToGroup={this.handleAddFriendToGroup}
+          handleRemoveFriendFromGroup={this.handleRemoveFriendFromGroup} />
       </div>
     );
   }
@@ -58,7 +68,9 @@ var FriendGroupList = React.createClass({
         <FriendGroup
           name={group.name}
           friendsData={this.props.friendsData}
-          groupFriendsData={friends} />
+          groupFriendsData={friends}
+          handleAddFriendToGroup={this.props.handleAddFriendToGroup}
+          handleRemoveFriendFromGroup={this.props.handleRemoveFriendFromGroup} />
       )
     }.bind(this));
 
@@ -72,19 +84,17 @@ var FriendGroupList = React.createClass({
 });
 
 var FriendGroup = React.createClass({
-  handleFriendAction: function () {
-
-  },
   render: function () {
     return (
       <div>
         <h4>{this.props.name}</h4>
         <FriendSearch
-          data={this.props.friendsData} />
+          data={this.props.friendsData}
+          handleAddFriendToGroup={this.props.handleAddFriendToGroup} />
         <FriendList
           data={this.props.groupFriendsData}
           friendActionName="Remove"
-          handlefriendAction={this.handleFriendAction} />
+          handleAction={this.props.handleRemoveFriendFromGroup} />
       </div>
     );
   }
@@ -96,7 +106,8 @@ var FriendList = React.createClass({
       return (
         <Friend
           name={friend.name}
-          actionName={this.props.friendActionName} />
+          actionName={this.props.friendActionName}
+          handleAction={this.props.handleAction} />
       );
     }.bind(this));
 
@@ -111,12 +122,12 @@ var FriendList = React.createClass({
 var Friend = React.createClass({
   handleAction: function (event) {
     event.preventDefault();
-    alert();
+    this.props.handleAction(this.props.groupId, this.props.id);
   },
   render: function () {
     return (
       <li>
-        <form onSubmit={this.handleAction} >
+        <form onSubmit={this.handleAction}>
           {this.props.name}
           <button>{this.props.actionName}</button>
         </form>
@@ -156,7 +167,7 @@ var FriendSearch = React.createClass({
         <FriendList
           data={this.state.filteredFriends}
           friendActionName="Add"
-          handlefriendAction={this.handleFriendAction} />
+          handleAction={this.props.handleAddFriendToGroup} />
       </div>
     );
   }

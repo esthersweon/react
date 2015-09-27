@@ -37,11 +37,21 @@ var FriendGroupBox = React.createClass({displayName: "FriendGroupBox",
       }.bind(this)
     });
   },
+  handleAddFriendToGroup: function (groupId, friendId) {
+    console.log(this.props.groupsUrl + "/" + groupId + this.props.friendsUrl + "/" + friendId);
+  },
+  handleRemoveFriendFromGroup: function (groupId, friendId) {
+    console.log(this.props.groupsUrl + "/" + groupId + this.props.friendsUrl + "/" + friendId);
+  },
   render: function () {
     return (
       React.createElement("div", null, 
         React.createElement("h2", null, "Friend Group"), 
-        React.createElement(FriendGroupList, {groupsData: this.state.groupsData, friendsData: this.state.friendsData})
+        React.createElement(FriendGroupList, {
+          groupsData: this.state.groupsData, 
+          friendsData: this.state.friendsData, 
+          handleAddFriendToGroup: this.handleAddFriendToGroup, 
+          handleRemoveFriendFromGroup: this.handleRemoveFriendFromGroup})
       )
     );
   }
@@ -58,7 +68,9 @@ var FriendGroupList = React.createClass({displayName: "FriendGroupList",
         React.createElement(FriendGroup, {
           name: group.name, 
           friendsData: this.props.friendsData, 
-          groupFriendsData: friends})
+          groupFriendsData: friends, 
+          handleAddFriendToGroup: this.props.handleAddFriendToGroup, 
+          handleRemoveFriendFromGroup: this.props.handleRemoveFriendFromGroup})
       )
     }.bind(this));
 
@@ -72,19 +84,17 @@ var FriendGroupList = React.createClass({displayName: "FriendGroupList",
 });
 
 var FriendGroup = React.createClass({displayName: "FriendGroup",
-  handleFriendAction: function () {
-
-  },
   render: function () {
     return (
       React.createElement("div", null, 
         React.createElement("h4", null, this.props.name), 
         React.createElement(FriendSearch, {
-          data: this.props.friendsData}), 
+          data: this.props.friendsData, 
+          handleAddFriendToGroup: this.props.handleAddFriendToGroup}), 
         React.createElement(FriendList, {
           data: this.props.groupFriendsData, 
           friendActionName: "Remove", 
-          handlefriendAction: this.handleFriendAction})
+          handleAction: this.props.handleRemoveFriendFromGroup})
       )
     );
   }
@@ -96,7 +106,8 @@ var FriendList = React.createClass({displayName: "FriendList",
       return (
         React.createElement(Friend, {
           name: friend.name, 
-          actionName: this.props.friendActionName})
+          actionName: this.props.friendActionName, 
+          handleAction: this.props.handleAction})
       );
     }.bind(this));
 
@@ -111,7 +122,7 @@ var FriendList = React.createClass({displayName: "FriendList",
 var Friend = React.createClass({displayName: "Friend",
   handleAction: function (event) {
     event.preventDefault();
-    alert();
+    this.props.handleAction(this.props.groupId, this.props.id);
   },
   render: function () {
     return (
@@ -156,7 +167,7 @@ var FriendSearch = React.createClass({displayName: "FriendSearch",
         React.createElement(FriendList, {
           data: this.state.filteredFriends, 
           friendActionName: "Add", 
-          handlefriendAction: this.handleFriendAction})
+          handleAction: this.props.handleAddFriendToGroup})
       )
     );
   }
