@@ -124,12 +124,33 @@ var FriendGroup = React.createClass({displayName: "FriendGroup",
   render: function () {
     return (
       React.createElement("div", null, 
-        this.props.name
+        React.createElement("h4", null, this.props.name), 
+        React.createElement(FriendList, null)
       )
     );
   }
 });
 
+var FriendList = React.createClass({displayName: "FriendList",
+  render: function () {
+    return (
+      React.createElement("ul", null, 
+        React.createElement(Friend, null), 
+        React.createElement(Friend, null)
+      )
+    );
+  }
+});
+
+var Friend = React.createClass({displayName: "Friend",
+  render: function () {
+    return (
+      React.createElement("li", null, 
+        "Friend"
+      )
+    );
+  }
+});
 
 React.render(
   React.createElement(FriendGroupBox, {groupsData: groups}),
