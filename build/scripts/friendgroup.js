@@ -119,7 +119,7 @@ var FriendSearch = React.createClass({displayName: "FriendSearch",
   },
   render: function () {
     console.log(this.state.searchTerm);
-    
+
     return (
       React.createElement("div", null, 
         React.createElement("input", {
@@ -127,7 +127,8 @@ var FriendSearch = React.createClass({displayName: "FriendSearch",
           placeholder: "Search for friends", 
           value: this.state.searchTerm, 
           onChange: this.handleTextChange}
-        )
+        ), 
+        React.createElement(FriendList, {data: this.props.data})
       )
     );
   }

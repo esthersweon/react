@@ -119,7 +119,7 @@ var FriendSearch = React.createClass({
   },
   render: function () {
     console.log(this.state.searchTerm);
-    
+
     return (
       <div>
         <input
@@ -128,6 +128,7 @@ var FriendSearch = React.createClass({
           value={this.state.searchTerm}
           onChange={this.handleTextChange}
         />
+        <FriendList data={this.props.data} />
       </div>
     );
   }
