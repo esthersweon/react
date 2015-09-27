@@ -90,3 +90,14 @@ var friends = [
         "name": "Mario"
     }
 ];
+
+var FriendGroupBox = React.createClass({displayName: "FriendGroupBox",
+  render: function () {
+    return (
+      React.createElement("div", null, 
+        React.createElement("h2", null, "Friend Group Component"), 
+        "// Group List"
+      )
+    );
+  }
+});
