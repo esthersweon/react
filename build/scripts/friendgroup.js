@@ -72,7 +72,7 @@ var FriendGroupBox = React.createClass({displayName: "FriendGroupBox",
   render: function () {
     return (
       React.createElement("div", null, 
-        React.createElement("h2", null, "Friend Group"), 
+        React.createElement("h2", null, "Friend Groups"), 
         React.createElement(FriendGroupList, {
           groupsData: this.state.groupsData, 
           friendsData: this.state.friendsData, 
@@ -103,7 +103,6 @@ var FriendGroupList = React.createClass({displayName: "FriendGroupList",
 
     return (
       React.createElement("div", null, 
-        React.createElement("h3", null, "FriendGroups"), 
         friendGroupNodes
       )
     );
@@ -113,8 +112,8 @@ var FriendGroupList = React.createClass({displayName: "FriendGroupList",
 var FriendGroup = React.createClass({displayName: "FriendGroup",
   render: function () {
     return (
-      React.createElement("div", null, 
-        React.createElement("h4", null, this.props.name), 
+      React.createElement("div", {className: "panel panel-default"}, 
+        React.createElement("div", {className: "panel-heading"}, this.props.name), 
         React.createElement(FriendSearch, {
           groupId: this.props.id, 
           data: this.props.friendsData, 
@@ -143,7 +142,7 @@ var FriendList = React.createClass({displayName: "FriendList",
     }.bind(this));
 
     return (
-      React.createElement("ul", null, 
+      React.createElement("ul", {className: "list-group"}, 
         friendNodes
       )
     );
@@ -157,10 +156,10 @@ var Friend = React.createClass({displayName: "Friend",
   },
   render: function () {
     return (
-      React.createElement("li", null, 
-        React.createElement("form", {onSubmit: this.handleAction}, 
+      React.createElement("li", {className: "list-group-item"}, 
+        React.createElement("form", {className: "clearfix", onSubmit: this.handleAction}, 
           this.props.name, 
-          React.createElement("button", null, this.props.actionName)
+          React.createElement("button", {className: "btn btn-default pull-right"}, this.props.actionName)
         )
       )
     );
@@ -197,8 +196,9 @@ var FriendSearch = React.createClass({displayName: "FriendSearch",
   },
   render: function () {
     return (
-      React.createElement("div", null, 
+      React.createElement("div", {className: "panel-body"}, 
         React.createElement("input", {
+          className: "form-control", 
           type: "text", 
           placeholder: "Search for friends", 
           value: this.state.searchTerm, 

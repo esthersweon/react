@@ -72,7 +72,7 @@ var FriendGroupBox = React.createClass({
   render: function () {
     return (
       <div>
-        <h2>Friend Group</h2>
+        <h2>Friend Groups</h2>
         <FriendGroupList
           groupsData={this.state.groupsData}
           friendsData={this.state.friendsData}
@@ -103,7 +103,6 @@ var FriendGroupList = React.createClass({
 
     return (
       <div>
-        <h3>FriendGroups</h3>
         {friendGroupNodes}
       </div>
     );
@@ -113,8 +112,8 @@ var FriendGroupList = React.createClass({
 var FriendGroup = React.createClass({
   render: function () {
     return (
-      <div>
-        <h4>{this.props.name}</h4>
+      <div className="panel panel-default">
+        <div className="panel-heading">{this.props.name}</div>
         <FriendSearch
           groupId={this.props.id}
           data={this.props.friendsData}
@@ -143,7 +142,7 @@ var FriendList = React.createClass({
     }.bind(this));
 
     return (
-      <ul>
+      <ul className="list-group">
         {friendNodes}
       </ul>
     );
@@ -157,10 +156,10 @@ var Friend = React.createClass({
   },
   render: function () {
     return (
-      <li>
-        <form onSubmit={this.handleAction}>
+      <li className="list-group-item">
+        <form className="clearfix" onSubmit={this.handleAction}>
           {this.props.name}
-          <button>{this.props.actionName}</button>
+          <button className="btn btn-default pull-right">{this.props.actionName}</button>
         </form>
       </li>
     );
@@ -197,8 +196,9 @@ var FriendSearch = React.createClass({
   },
   render: function () {
     return (
-      <div>
+      <div className="panel-body">
         <input
+          className="form-control"
           type="text"
           placeholder="Search for friends"
           value={this.state.searchTerm}
