@@ -1,0 +1,32 @@
+[
+    {
+        "id": "1",
+        "name": "Superheros",
+        "friendIds": [
+            "1",
+            "2",
+            "3",
+            "10",
+            "15",
+            "4"
+        ]
+    },
+    {
+        "id": "3",
+        "name": "People",
+        "friendIds": [
+            "9",
+            "21",
+            "1"
+        ]
+    },
+    {
+        "id": "4",
+        "name": "Fictional Characters",
+        "friendIds": [
+            "10",
+            "11",
+            "1"
+        ]
+    }
+]
