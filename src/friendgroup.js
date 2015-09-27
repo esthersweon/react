@@ -106,20 +106,12 @@ var FriendGroupBox = React.createClass({
 var FriendGroupList = React.createClass({
   render: function () {
     var friendGroupNodes = this.props.groupsData.map(function (group) {
-      console.log("friendIds:");
-      console.log(group.friendIds);
-      console.log("this.props.friendsData:");
-      console.log(this.props.friendsData);
-
       var friends = this.props.friendsData.filter(function (friend) {
         return group.friendIds.indexOf(friend.id) > -1;
       });
 
-      console.log("Friends");
-      console.log(friends);
-
       return (
-        <FriendGroup name={group.name} />
+        <FriendGroup name={group.name} friendsData={friends} />
       )
     }.bind(this));
 
@@ -134,10 +126,12 @@ var FriendGroupList = React.createClass({
 
 var FriendGroup = React.createClass({
   render: function () {
+    // console.log(this.props.friendsData);
+
     return (
       <div>
         <h4>{this.props.name}</h4>
-        <FriendList />
+        <FriendList data={this.props.friendsData} />
       </div>
     );
   }
@@ -145,6 +139,8 @@ var FriendGroup = React.createClass({
 
 var FriendList = React.createClass({
   render: function () {
+    console.log(this.props.data);
+
     return (
       <ul>
         <Friend />
