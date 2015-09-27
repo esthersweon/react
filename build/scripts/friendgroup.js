@@ -6,6 +6,10 @@ var FriendGroupBox = React.createClass({displayName: "FriendGroupBox",
     };
   },
   componentDidMount: function () {
+    this.loadGroupData();
+    this.loadFriendData();
+  },
+  loadGroupData: function () {
     $.ajax({
       method: 'get',
       url: this.props.groupsUrl,
@@ -13,9 +17,13 @@ var FriendGroupBox = React.createClass({displayName: "FriendGroupBox",
         this.setState({
           groupsData: data
         });
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
-
+  },
+  loadFriendData: function () {
     $.ajax({
       method: 'get',
       url: this.props.friendsUrl,
@@ -23,6 +31,9 @@ var FriendGroupBox = React.createClass({displayName: "FriendGroupBox",
         this.setState({
           friendsData: data
         });
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
   },
@@ -30,7 +41,6 @@ var FriendGroupBox = React.createClass({displayName: "FriendGroupBox",
     return (
       React.createElement("div", null, 
         React.createElement("h2", null, "Friend Group"), 
-
         React.createElement(FriendGroupList, {groupsData: this.state.groupsData, friendsData: this.state.friendsData})
       )
     );
@@ -63,6 +73,7 @@ var FriendGroup = React.createClass({displayName: "FriendGroup",
     return (
       React.createElement("div", null, 
         React.createElement("h4", null, this.props.name), 
+        React.createElement(FriendSearch, null), 
         React.createElement(FriendList, {data: this.props.friendsData})
       )
     );
@@ -90,6 +101,16 @@ var Friend = React.createClass({displayName: "Friend",
     return (
       React.createElement("li", null, 
         this.props.name
+      )
+    );
+  }
+});
+
+var FriendSearch = React.createClass({displayName: "FriendSearch",
+  render: function () {
+    return (
+      React.createElement("div", null, 
+        React.createElement("input", {type: "text", placeholder: "Search for friends"})
       )
     );
   }

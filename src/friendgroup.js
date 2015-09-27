@@ -6,6 +6,10 @@ var FriendGroupBox = React.createClass({
     };
   },
   componentDidMount: function () {
+    this.loadGroupData();
+    this.loadFriendData();
+  },
+  loadGroupData: function () {
     $.ajax({
       method: 'get',
       url: this.props.groupsUrl,
@@ -13,9 +17,13 @@ var FriendGroupBox = React.createClass({
         this.setState({
           groupsData: data
         });
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
-
+  },
+  loadFriendData: function () {
     $.ajax({
       method: 'get',
       url: this.props.friendsUrl,
@@ -23,6 +31,9 @@ var FriendGroupBox = React.createClass({
         this.setState({
           friendsData: data
         });
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
   },
@@ -30,7 +41,6 @@ var FriendGroupBox = React.createClass({
     return (
       <div>
         <h2>Friend Group</h2>
-
         <FriendGroupList groupsData={this.state.groupsData} friendsData={this.state.friendsData} />
       </div>
     );
@@ -63,6 +73,7 @@ var FriendGroup = React.createClass({
     return (
       <div>
         <h4>{this.props.name}</h4>
+        <FriendSearch />
         <FriendList data={this.props.friendsData} />
       </div>
     );
@@ -91,6 +102,16 @@ var Friend = React.createClass({
       <li>
         {this.props.name}
       </li>
+    );
+  }
+});
+
+var FriendSearch = React.createClass({
+  render: function () {
+    return (
+      <div>
+        <input type="text" placeholder="Search for friends" />
+      </div>
     );
   }
 });
