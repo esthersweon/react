@@ -174,6 +174,14 @@ var FriendSearch = React.createClass({displayName: "FriendSearch",
       filteredFriends: []
     }
   },
+  handleAddFriendToGroup: function (groupId, friendId) {
+    this.props.handleAddFriendToGroup(groupId, friendId);
+
+    this.setState({
+      searchTerm: "",
+      filteredFriends: []
+    })
+  },
   handleTextChange: function (event) {
     var searchTerm = event.target.value,
       filteredFriends;
@@ -199,7 +207,7 @@ var FriendSearch = React.createClass({displayName: "FriendSearch",
           groupId: this.props.groupId, 
           data: this.state.filteredFriends, 
           friendActionName: "Add", 
-          handleAction: this.props.handleAddFriendToGroup})
+          handleAction: this.handleAddFriendToGroup})
       )
     );
   }
