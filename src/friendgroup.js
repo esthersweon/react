@@ -100,10 +100,17 @@ var FriendList = React.createClass({
 });
 
 var Friend = React.createClass({
+  handleAction: function (event) {
+    event.preventDefault();
+    alert();
+  },
   render: function () {
     return (
       <li>
-        {this.props.name}
+        <form onSubmit={this.handleAction} >
+          {this.props.name}
+          <button>{this.props.actionName}</button>
+        </form>
       </li>
     );
   }
