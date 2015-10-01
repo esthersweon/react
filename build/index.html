@@ -2,33 +2,44 @@
 <html>
   <head>
     <title>React Tutorial</title>
-    
-    <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/base.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/JSXTransformer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
   </head>
+
   <body>
     <div class="jumbotron">
-      <div class="container" style="text-align: center">
+      <div class="container">
         <h1>See what's happening right now.</h1>
         <h3>Find community, conversation, and inspiration about the things you love.</h3>
       </div>
     </div>
+
     <div class="container">
       <div class="row">
+        <!-- Timer exercise will be rendered here -->
+        <div class="col-md-12">
+          <div id="hello"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- FriendGroup exercise will be rendered here -->
         <div class="col-md-4">
           <div id="friend-group"></div>
         </div>
+
+        <!-- Tweet exercise will be rendered here -->
         <div class="col-md-7 col-md-offset-1">
-          <div id="content"></div>
+          <div id="tweets"></div>
         </div>
       </div>
     </div>
-    <!-- <script type="text/jsx;harmony=true" src="scripts/example.jsx"></script> -->
+
+    <script type="text/jsx;harmony=true" src="scripts/timer.js"></script>
     <script type="text/javascript" src="scripts/tweet.js"></script>
     <script type="text/javascript" src="scripts/friendgroup.js"></script>
   </body>

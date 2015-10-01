@@ -169,7 +169,7 @@ var Friend = React.createClass({
 var FriendSearch = React.createClass({
   getInitialState: function () {
     return {
-      searchTerm: "",
+      searchTerm: '',
       filteredFriends: []
     }
   },
@@ -177,7 +177,7 @@ var FriendSearch = React.createClass({
     this.props.handleAddFriendToGroup(groupId, friendId);
 
     this.setState({
-      searchTerm: "",
+      searchTerm: '',
       filteredFriends: []
     })
   },

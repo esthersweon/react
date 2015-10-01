@@ -1,4 +1,4 @@
 *~
 node_modules
-build/scripts/.module_cache
+build/scripts/.module-cache
 .DS_Store
