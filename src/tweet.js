@@ -3,7 +3,6 @@ var TwitterContainer = React.createClass({
     return { data: [] };
   },
   loadTweetsFromServer: function() {
-
     // GET updated set of tweets from database
     $.ajax({
       url: this.props.url,
@@ -46,7 +45,6 @@ var TwitterContainer = React.createClass({
     });
   },
   componentDidMount: function() {
-
     // Set this.state.data to most recent set of tweets from database
     this.loadTweetsFromServer();
 
@@ -78,7 +76,7 @@ var TweetForm = React.createClass({
     }
 
     // Send new author and text up one level to TwitterContainer component
-    // so that the updated tweets can be passed down again into TweetList component
+    // so updated tweets can be passed down again into TweetList component
     this.props.onTweetSubmit({author: author, text: text});
 
     // Set input fields back to empty

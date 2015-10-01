@@ -1,51 +1,57 @@
-var FriendGroupBox = React.createClass({
+var FriendGroupContainer = React.createClass({
   getInitialState: function () {
     return {
-      groupsData: [],
-      friendsData: []
+      groups: [],
+      friends: []
     };
   },
   componentDidMount: function () {
+    // Set this.state.groups to most recent groups data from database
     this.loadGroupData();
+
+    // Set this.state.friends to most recent friends data from database
     this.loadFriendData();
   },
   loadGroupData: function () {
+    // GET updated groups from database
     $.ajax({
-      method: 'get',
-      url: this.props.groupsUrl,
+      method: 'GET',
+      url: '/groups',
       success: function (data) {
         this.setState({
-          groupsData: data
+          groups: data
         });
       }.bind(this),
       error: function (xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+        console.error(status, err.toString());
       }.bind(this)
     });
   },
   loadFriendData: function () {
+    // GET updated friends from database
     $.ajax({
-      method: 'get',
-      url: this.props.friendsUrl,
+      method: 'GET',
+      url: '/friends',
       success: function (data) {
         this.setState({
-          friendsData: data
+          friends: data
         });
       }.bind(this),
       error: function (xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+        console.error(status, err.toString());
       }.bind(this)
     });
   },
-  handleAddFriendToGroup: function (groupId, friendId) {
-    var url = this.props.groupsUrl + "/" + groupId + this.props.friendsUrl + "/" + friendId;
+  handleAddFriend: function (groupId, friendId) {
+    var url = '/groups/' + groupId + '/friends/' + friendId;
 
+    // POST new friend to a group
     $.ajax({
-      method: 'post',
+      method: 'POST',
       url: url,
-      success: function (data) {
+      success: function (response) {
         this.setState({
-          groupsData: data
+          groups: response
         });
       }.bind(this),
       error: function (xhr, status, err) {
@@ -53,15 +59,16 @@ var FriendGroupBox = React.createClass({
       }.bind(this)
     });
   },
-  handleRemoveFriendFromGroup: function (groupId, friendId) {
-    var url = this.props.groupsUrl + "/" + groupId + this.props.friendsUrl + "/" + friendId;
+  handleRemoveFriend: function (groupId, friendId) {
+    var url = '/groups/' + groupId + '/friends/' + friendId;
 
+    // DELETE friend from group
     $.ajax({
-      method: 'delete',
+      method: 'DELETE',
       url: url,
-      success: function (data) {
+      success: function (response) {
         this.setState({
-          groupsData: data
+          groups: response
         });
       }.bind(this),
       error: function (xhr, status, err) {
@@ -69,41 +76,29 @@ var FriendGroupBox = React.createClass({
       }.bind(this)
     });
   },
-  render: function () {
-    return (
-      <div>
-        <h2>Friend Groups</h2>
-        <FriendGroupList
-          groupsData={this.state.groupsData}
-          friendsData={this.state.friendsData}
-          handleAddFriendToGroup={this.handleAddFriendToGroup}
-          handleRemoveFriendFromGroup={this.handleRemoveFriendFromGroup} />
-      </div>
-    );
-  }
-});
-
-var FriendGroupList = React.createClass({
-  render: function () {
-    var friendGroupNodes = this.props.groupsData.map(function (group) {
-      var friends = this.props.friendsData.filter(function (friend) {
+  getFriendGroupNodes: function() {
+    return this.state.groups.map(function (group, idx) {
+      var friends = this.state.friends.filter(function (friend) {
         return group.friendIds.indexOf(friend.id) > -1;
       });
 
       return (
         <FriendGroup
-          id={group.id}
-          name={group.name}
-          friendsData={this.props.friendsData}
-          groupFriendsData={friends}
-          handleAddFriendToGroup={this.props.handleAddFriendToGroup}
-          handleRemoveFriendFromGroup={this.props.handleRemoveFriendFromGroup} />
+          key={ idx }
+          id={ group.id }
+          name={ group.name }
+          friends={ this.state.friends }
+          groupFriends={ friends }
+          handleAddFriend={ this.handleAddFriend }
+          handleRemoveFriend={ this.handleRemoveFriend } />
       )
     }.bind(this));
-
+  },
+  render: function () {
     return (
       <div>
-        {friendGroupNodes}
+        <h2>Friend Groups</h2>
+        { this.getFriendGroupNodes() }
       </div>
     );
   }
@@ -115,53 +110,15 @@ var FriendGroup = React.createClass({
       <div className="panel panel-default">
         <div className="panel-heading">{this.props.name}</div>
         <FriendSearch
-          groupId={this.props.id}
-          data={this.props.friendsData}
-          handleAddFriendToGroup={this.props.handleAddFriendToGroup} />
-        <FriendList
-          groupId={this.props.id}
-          data={this.props.groupFriendsData}
-          friendActionName="Remove"
-          handleAction={this.props.handleRemoveFriendFromGroup} />
+          groupId={ this.props.id }
+          friends={ this.props.friends }
+          handleAddFriend={ this.props.handleAddFriend } />
+        <FriendsList
+          groupId={ this.props.id }
+          friends={ this.props.groupFriends }
+          actionType="Remove"
+          handleAction={ this.props.handleRemoveFriend } />
       </div>
-    );
-  }
-});
-
-var FriendList = React.createClass({
-  render: function () {
-    var friendNodes = this.props.data.map(function (friend) {
-      return (
-        <Friend
-          id={friend.id}
-          groupId={this.props.groupId}
-          name={friend.name}
-          actionName={this.props.friendActionName}
-          handleAction={this.props.handleAction} />
-      );
-    }.bind(this));
-
-    return (
-      <ul className="list-group">
-        {friendNodes}
-      </ul>
-    );
-  }
-});
-
-var Friend = React.createClass({
-  handleAction: function (event) {
-    event.preventDefault();
-    this.props.handleAction(this.props.groupId, this.props.id);
-  },
-  render: function () {
-    return (
-      <li className="list-group-item">
-        <form className="clearfix" onSubmit={this.handleAction}>
-          {this.props.name}
-          <button className="btn btn-default pull-right">{this.props.actionName}</button>
-        </form>
-      </li>
     );
   }
 });
@@ -173,19 +130,18 @@ var FriendSearch = React.createClass({
       filteredFriends: []
     }
   },
-  handleAddFriendToGroup: function (groupId, friendId) {
-    this.props.handleAddFriendToGroup(groupId, friendId);
+  handleAddFriend: function (groupId, friendId) {
+    this.props.handleAddFriend(groupId, friendId);
 
     this.setState({
       searchTerm: '',
       filteredFriends: []
     })
   },
-  handleTextChange: function (event) {
-    var searchTerm = event.target.value,
-      filteredFriends;
+  handleTextChange: function (e) {
+    var searchTerm = e.target.value;
 
-    filteredFriends = this.props.data.filter(function (friend) {
+    var filteredFriends = this.props.friends.filter(function (friend) {
       return searchTerm && friend.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
@@ -197,23 +153,48 @@ var FriendSearch = React.createClass({
   render: function () {
     return (
       <div className="panel-body">
-        <input
-          className="form-control"
+        <input className="form-control"
           type="text"
           placeholder="Search for friends"
-          value={this.state.searchTerm}
-          onChange={this.handleTextChange} />
-        <FriendList
-          groupId={this.props.groupId}
-          data={this.state.filteredFriends}
-          friendActionName="Add"
-          handleAction={this.handleAddFriendToGroup} />
+          value={ this.state.searchTerm }
+          onChange={ this.handleTextChange } />
+        <FriendsList
+          groupId={ this.props.groupId }
+          friends={ this.state.filteredFriends }
+          actionType="Add"
+          handleAction={ this.handleAddFriend } />
       </div>
     );
   }
 });
 
+var FriendsList = React.createClass({
+  handleAction: function (friend_id, e) {
+    e.preventDefault();
+    this.props.handleAction(this.props.groupId, friend_id);
+  },
+  getFriendNodes: function() {
+    return this.props.friends.map(function (friend, idx) {
+      return (
+        <li key={ idx } className="list-group-item">
+          <form className="clearfix" onSubmit={ this.handleAction.bind(this, friend.id) }>
+            { friend.name }
+            <button className="btn btn-default pull-right">{ this.props.actionType }</button>
+          </form>
+        </li>
+      );
+    }.bind(this));
+  },
+  render: function () {
+    return (
+      <ul className="list-group">
+        { this.getFriendNodes() }
+      </ul>
+    );
+  }
+});
+
 React.render(
-  <FriendGroupBox groupsUrl={"/groups"} friendsUrl={"/friends"} />,
+  <FriendGroupContainer/>,
   document.getElementById('friend-group')
 );
