@@ -7,15 +7,14 @@ There is a simple node server implementation included. It simply serves static f
 
 ```sh
 npm install
-node server.js
+npm start
 ```
 
 Visit <http://localhost:3000/>.
 
 
-### To Compile JSX to Vanilla Javascript
+### To Compile JSX to Javascript While Developing
 
 ```sh
-npm install -g react-tools
-jsx --watch src/ build/scripts/
+gulp
 ```
