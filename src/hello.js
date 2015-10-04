@@ -1,3 +1,22 @@
+// create your Hello React Component here
+var Hello = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <h1>{this.props.title}</h1>
+        <div>Hello React!</div>
+      </div>
+    );
+  }
+});
+
+// render your Hello React Component here
+React.render(
+  <Hello title=”React Example” />,
+  document.getElementById('hello')
+);
+
+// define styles for your Timer React Component here
 var styles = {
   text: {
     fontSize: '32px', 
@@ -10,7 +29,8 @@ var styles = {
   }
 };
 
-var Hello = React.createClass({
+// create your Timer React Component here
+var Timer = React.createClass({
   getInitialState: function () {
     return { seconds: 0 };
   },
@@ -29,7 +49,8 @@ var Hello = React.createClass({
   }
 });
 
+// render your Timer React Component here
 React.render(
-  <Hello text="Time Spent on Page:" />,
-  document.getElementById('hello')
+  <Timer text="Time Spent on Page:" />,
+  document.getElementById('timer')
 );
