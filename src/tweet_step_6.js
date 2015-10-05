@@ -9,8 +9,8 @@ var TwitterContainer = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(data) {
-        this.setState({ 
-          data: data 
+        this.setState({
+          data: data
         });
       }.bind(this),
       error: function(xhr, status, err) {
@@ -19,29 +19,19 @@ var TwitterContainer = React.createClass({
     });
   },
   handleTweetSubmit: function(tweet) {
-    // Make copy of this.state.data
-    // IMPORTANT: never directly manipulate this.state or this.props
-    var tweets = this.state.data.slice();
-
-    // Add most recent tweet to beginning of tweets array
-    tweets.unshift(tweet);
-
-    // POST to add tweet to database
-    this.setState({ data: tweets }, function() {
-      $.ajax({
-        url: this.props.url,
-        dataType: 'json',
-        type: 'POST',
-        data: tweet,
-        success: function(data) {
-          this.setState({
-            data: data
-          });
-        }.bind(this),
-        error: function(xhr, status, err) {
-          console.error(this.props.url, status, err.toString());
-        }.bind(this)
-      });
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: tweet,
+      success: function(data) {
+        this.setState({
+          data: data
+        });
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
     });
   },
   componentDidMount: function() {
@@ -83,9 +73,9 @@ var TweetForm = React.createClass({
     React.findDOMNode(this.refs.author).value = '';
     React.findDOMNode(this.refs.text).value = '';
   },
-  render: function() {
+  render: function () {
     return (
-      <form className="tweetForm" onSubmit={ this.handleSubmit }>
+      <form className="tweetForm" onSubmit={this.handleSubmit}>
         <div className="col-md-3">
           <input type="text" className="form-control" placeholder="Author Name" ref="author" />
         </div>
@@ -101,35 +91,35 @@ var TweetForm = React.createClass({
 });
 
 var TweetList = React.createClass({
-  render: function() {
-    var tweetsInReverseOrder = this.props.data.reverse();
+  render: function() {
+    var tweetsInReverseOrder = this.props.data.reverse();
 
-    return (
-      <div className="tweetList">
-        { tweetsInReverseOrder.map(function(tweet, idx) {
-            return (
-              // 'key' is a React-specific concept, not mandatory for this tutorial
-              // More info: http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
-              <Tweet key={ idx } author={ tweet.author } text={ tweet.text }/>
-            )
-          })
-        }
-      </div>
-    );
-  }
+    return (
+      <div className="tweetList">
+        {
+          tweetsInReverseOrder.map(function(tweet, idx) {
+            return (
+              // 'key' is a React-specific concept, but not mandatory for this tutorial
+              // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
+              <Tweet key={ idx } author={ tweet.author } text={ tweet.text } />
+            )
+          })
+        }
+      </div>
+    );
+  }
 });
 
 var Tweet = React.createClass({
-  render: function() {
+  render: function () {
     return (
-      <div className="tweet">
+      <div>
         <h2 className="tweetText">{ this.props.text }</h2>
         <span className="tweetAuthor"> - { this.props.author }</span>
       </div>
-    );
+    )
   }
 });
-
 
 React.render(
   <TwitterContainer url="tweets.json" pollInterval={ 2000 } />,
