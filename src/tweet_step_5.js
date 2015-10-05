@@ -37,9 +37,29 @@ var TwitterContainer = React.createClass({
 });
 
 var TweetForm = React.createClass({
+  handleSubmit: function(e) {
+    e.preventDefault();
+
+    // Get new author and text from the input fields
+    var author = React.findDOMNode(this.refs.author).value.trim();
+    var text = React.findDOMNode(this.refs.text).value.trim();
+
+    // Do nothing if either input field is blank
+    if (!text || !author) {
+      return;
+    }
+
+    // Send new author and text up one level to TwitterContainer component
+    // so updated tweets can be passed down again into TweetList component
+    alert('Send tweet data to server');
+
+    // Set input fields back to empty
+    React.findDOMNode(this.refs.author).value = '';
+    React.findDOMNode(this.refs.text).value = '';
+  },
   render: function () {
     return (
-      <form className="tweetForm">
+      <form className="tweetForm" onSubmit={this.handleSubmit}>
         <div className="col-md-3">
           <input type="text" className="form-control" placeholder="Author Name" ref="author" />
         </div>
