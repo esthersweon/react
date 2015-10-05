@@ -67,7 +67,7 @@ var TweetForm = React.createClass({
 
     // Send new author and text up one level to TwitterContainer component
     // so updated tweets can be passed down again into TweetList component
-    this.props.onTweetSubmit({author: author, text: text});
+    this.props.onTweetSubmit({ author: author, text: text });
 
     // Set input fields back to empty
     React.findDOMNode(this.refs.author).value = '';
@@ -75,7 +75,7 @@ var TweetForm = React.createClass({
   },
   render: function () {
     return (
-      <form className="tweetForm" onSubmit={this.handleSubmit}>
+      <form className="tweetForm" onSubmit={ this.handleSubmit }>
         <div className="col-md-3">
           <input type="text" className="form-control" placeholder="Author Name" ref="author" />
         </div>
@@ -91,33 +91,33 @@ var TweetForm = React.createClass({
 });
 
 var TweetList = React.createClass({
-  render: function() {
-    var tweetsInReverseOrder = this.props.data.reverse();
+  render: function() {
+    var tweetsInReverseOrder = this.props.data.reverse();
 
-    return (
-      <div className="tweetList">
-        {
+    return (
+      <div className="tweetList">
+        {
           tweetsInReverseOrder.map(function(tweet, idx) {
-            return (
-              // 'key' is a React-specific concept, but not mandatory for this tutorial
-              // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
-              <Tweet key={ idx } author={ tweet.author } text={ tweet.text } />
-            )
-          })
-        }
-      </div>
-    );
-  }
+            return (
+              // 'key' is a React-specific concept, but not mandatory for this tutorial
+              // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
+              <Tweet key={ idx } author={ tweet.author } text={ tweet.text } />
+            );
+          })
+        }
+      </div>
+    );
+  }
 });
 
 var Tweet = React.createClass({
   render: function () {
     return (
-      <div>
+      <div className="tweet">
         <h2 className="tweetText">{ this.props.text }</h2>
         <span className="tweetAuthor"> - { this.props.author }</span>
       </div>
-    )
+    );
   }
 });
 

@@ -55,33 +55,33 @@ var TweetForm = React.createClass({
 });
 
 var TweetList = React.createClass({
-  render: function() {
-    var tweetsInReverseOrder = this.props.data.reverse();
+  render: function() {
+    var tweetsInReverseOrder = this.props.data.reverse();
 
-    return (
-      <div className="tweetList">
-        {
+    return (
+      <div className="tweetList">
+        {
           tweetsInReverseOrder.map(function(tweet, idx) {
-            return (
-              // 'key' is a React-specific concept, but not mandatory for this tutorial
-              // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
-              <Tweet key={ idx } author={ tweet.author } text={ tweet.text } />
-            )
-          })
-        }
-      </div>
-    );
-  }
+            return (
+              // 'key' is a React-specific concept, but not mandatory for this tutorial
+              // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
+              <Tweet key={ idx } author={ tweet.author } text={ tweet.text } />
+            );
+          })
+        }
+      </div>
+    );
+  }
 });
 
 var Tweet = React.createClass({
   render: function () {
     return (
-      <div>
+      <div className="tweet">
         <h2 className="tweetText">{ this.props.text }</h2>
         <span className="tweetAuthor"> - { this.props.author }</span>
       </div>
-    )
+    );
   }
 });
 

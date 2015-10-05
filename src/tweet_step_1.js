@@ -27,7 +27,7 @@ var TweetForm = React.createClass({
       <form>
         TweetForm component
       </form>
-    )
+    );
   }
 });
 
@@ -39,7 +39,7 @@ var TweetList = React.createClass({
       <div>
         TweetList component
       </div>
-    )
+    );
   }
 });
 
@@ -49,7 +49,7 @@ var Tweet = React.createClass({
       <div>
         Tweet component
       </div>
-    )
+    );
   }
 });
 
