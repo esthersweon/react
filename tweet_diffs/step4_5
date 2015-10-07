@@ -1,6 +1,6 @@
---- src/tweet_step_4.js	2015-10-06 22:38:20.000000000 -0700
-+++ src/tweet_step_5.js	2015-10-06 22:38:15.000000000 -0700
-@@ -48,6 +48,26 @@
+--- src/tweet_step_4.js	2015-10-06 22:54:45.000000000 -0700
++++ src/tweet_step_5.js	2015-10-06 22:55:25.000000000 -0700
+@@ -48,9 +48,29 @@
  });
  
  var TweetForm = React.createClass({
@@ -18,7 +18,7 @@
 +
 +    // Send new author and text up one level to Twitter component
 +    // so updated tweets can be passed down again into TweetList component
-+    alert('Send tweet data to server');
++    alert('Send tweet data; author: ' + author + ', text: ' + text);
 +
 +    // Set input fields back to empty
 +    React.findDOMNode(this.refs.author).value = '';
@@ -26,4 +26,8 @@
 +  },
    render: function () {
      return (
-       <form className="tweetForm" onSubmit={ this.handleSubmit }>
+-      <form className="tweetForm">
++      <form className="tweetForm" onSubmit={ this.handleSubmit }>
+         <input type="text" placeholder="Author Name" ref="author" />
+         <input type="text" placeholder="Tweet" ref="text" />
+         <button type="submit" className="btn btn-info">Tweet</button>
