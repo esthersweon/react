@@ -1,0 +1,15 @@
+--- src/tweet_step_3.js	2015-10-06 22:38:24.000000000 -0700
++++ src/tweet_step_4.js	2015-10-06 22:38:20.000000000 -0700
+@@ -50,8 +50,10 @@
+ var TweetForm = React.createClass({
+   render: function () {
+     return (
+-      <form className="tweetForm">
+-        TweetForm component
++      <form className="tweetForm" onSubmit={ this.handleSubmit }>
++        <input type="text" placeholder="Author Name" ref="author" />
++        <input type="text" placeholder="Tweet" ref="text" />
++        <button type="submit" className="btn btn-info">Tweet</button>
+       </form>
+     );
+   }
