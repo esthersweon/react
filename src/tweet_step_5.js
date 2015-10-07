@@ -62,7 +62,7 @@ var TweetForm = React.createClass({
 
     // Send new author and text up one level to Twitter component
     // so updated tweets can be passed down again into TweetList component
-    alert('Send tweet data to server');
+    alert('Send tweet data; author: ' + author + ', text: ' + text);
 
     // Set input fields back to empty
     React.findDOMNode(this.refs.author).value = '';

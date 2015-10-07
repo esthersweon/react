@@ -50,7 +50,7 @@ var Twitter = React.createClass({
 var TweetForm = React.createClass({
   render: function () {
     return (
-      <form className="tweetForm" onSubmit={ this.handleSubmit }>
+      <form className="tweetForm">
         <input type="text" placeholder="Author Name" ref="author" />
         <input type="text" placeholder="Tweet" ref="text" />
         <button type="submit" className="btn btn-info">Tweet</button>
