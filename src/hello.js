@@ -12,7 +12,7 @@ var Hello = React.createClass({
 
 // render your Hello React Component here
 React.render(
-  <Hello title=”React Example” />,
+  <Hello title="React Example" />,
   document.getElementById('hello')
 );
 
