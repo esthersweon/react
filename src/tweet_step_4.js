@@ -51,8 +51,8 @@ var TweetForm = React.createClass({
   render: function () {
     return (
       <form className="tweetForm">
-        <input type="text" placeholder="Author Name" ref="author" />
-        <input type="text" placeholder="Tweet" ref="text" />
+        <input type="text" placeholder="Author Name" />
+        <input type="text" placeholder="Tweet" />
         <button type="submit" className="btn btn-info">Tweet</button>
       </form>
     );
