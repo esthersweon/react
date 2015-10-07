@@ -1,24 +1,23 @@
-var TwitterContainer = React.createClass({
-  getInitialState: function() {
+var Twitter = React.createClass({
+  getInitialState: function () {
     return { data: [] };
   },
-  loadTweetsFromServer: function() {
+  loadTweetsFromServer: function () {
     // GET updated set of tweets from database
     $.ajax({
       url: this.props.url,
       dataType: 'json',
-      cache: false,
-      success: function(data) {
+      success: function (data) {
         this.setState({
           data: data
         });
       }.bind(this),
-      error: function(xhr, status, err) {
+      error: function (xhr, status, err) {
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
   },
-  handleTweetSubmit: function(tweet) {
+  handleTweetSubmit: function (tweet) {
     // Make copy of this.state.data
     // IMPORTANT: never directly manipulate this.state or this.props
     var tweets = this.state.data.slice();
@@ -27,33 +26,30 @@ var TwitterContainer = React.createClass({
     tweets.unshift(tweet);
 
     // POST to add tweet to database
-    this.setState({ data: tweets }, function() {
+    this.setState({ data: tweets }, function () {
       $.ajax({
         url: this.props.url,
         dataType: 'json',
         type: 'POST',
         data: tweet,
-        success: function(data) {
+        success: function (data) {
           this.setState({
             data: data
           });
         }.bind(this),
-        error: function(xhr, status, err) {
+        error: function (xhr, status, err) {
           console.error(this.props.url, status, err.toString());
         }.bind(this)
       });
     });
   },
-  componentDidMount: function() {
+  componentDidMount: function () {
     // Set this.state.data to most recent set of tweets from database
     this.loadTweetsFromServer();
-
-    // Ping database for updated set of tweets every 2000 ms
-    setInterval(this.loadTweetsFromServer, this.props.pollInterval);
   },
-  render: function() {
+  render: function () {
     return (
-      <div className="tweetBox">
+      <div className="twitter">
         <h1>Tweets</h1>
         <TweetForm onTweetSubmit={ this.handleTweetSubmit } />
         <TweetList data={ this.state.data } />
@@ -75,7 +71,7 @@ var TweetForm = React.createClass({
       return;
     }
 
-    // Send new author and text up one level to TwitterContainer component
+    // Send new author and text up one level to Twitter component
     // so updated tweets can be passed down again into TweetList component
     this.props.onTweetSubmit({ author: author, text: text });
 
@@ -86,22 +82,16 @@ var TweetForm = React.createClass({
   render: function () {
     return (
       <form className="tweetForm" onSubmit={ this.handleSubmit }>
-        <div className="col-md-3">
-          <input type="text" className="form-control" placeholder="Author Name" ref="author" />
-        </div>
-        <div className="col-md-7">
-          <input type="text" className="form-control" placeholder="Tweet (140 chars max)" ref="text" />
-        </div>
-        <div className="col-md-2">
-          <input type="submit" className="btn btn-info" value="Tweet" />
-        </div>
+        <input type="text" placeholder="Author Name" ref="author" />
+        <input type="text" placeholder="Tweet" ref="text" />
+        <button type="submit" className="btn btn-info">Tweet</button>
       </form>
     );
   }
 });
 
 var TweetList = React.createClass({
-  render: function() {
+  render: function () {
     var tweetsInReverseOrder = this.props.data.reverse();
 
     return (
@@ -132,6 +122,6 @@ var Tweet = React.createClass({
 });
 
 React.render(
-  <TwitterContainer url="tweets.json" pollInterval={ 2000 } />,
+  <Twitter url="tweets.json" />,
   document.getElementById('tweets')
 );
