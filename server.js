@@ -21,7 +21,7 @@ app.get('/tweets.json', function(req, res) {
 app.post('/tweets.json', function(req, res) {
   fs.readFile('tweets.json', function(err, data) {
     var tweets = JSON.parse(data);
-    tweets.push(req.body);
+    tweets.unshift(req.body);
     fs.writeFile('tweets.json', JSON.stringify(tweets, null, 4), function(err) {
       res.setHeader('Cache-Control', 'no-cache');
       res.json(tweets);
