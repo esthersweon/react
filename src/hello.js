@@ -16,41 +16,38 @@ React.render(
   document.getElementById('hello')
 );
 
-/* define styles for your Timer React Component here */
+/* define styles for your ClickCounter React Component here */
 var styles = {
   text: {
     fontSize: '32px', 
-    fontWeight: '600', 
-    textDecoration: 'underline'
+    fontWeight: '600'
   }, 
-  secondsText: {
+  clickCount: {
     color: 'mediumaquamarine',
     fontSize: '24px'
   }
 };
 
-/* create your Timer React Component here */
-var Timer = React.createClass({
+/* create your ClickCounter React Component here */
+var ClickCounter = React.createClass({
   getInitialState: function () {
-    return { seconds: 0 };
+    return { clicks: 0 };
   },
-  componentDidMount: function () {
-    setInterval(function () {
-      this.setState({ seconds: this.state.seconds + 1 });
-    }.bind(this), 1000);
+  handleBtnClick: function(e) {
+    e.preventDefault();
+    this.setState({ clicks: this.state.clicks + 1 });
   },
   render: function() {
     return (
-      <div className="timer">
-        <div style={ styles.text }>{ this.props.text }</div>
-        <div style={ styles.secondsText }>{ this.state.seconds } seconds</div>
-      </div>
+      <button className="click-counter btn btn-primary" style={ styles.text } onClick={ this.handleBtnClick }>
+        { this.props.text } <span className="badge" style={ styles.clickCount } >{ this.state.clicks }</span>
+      </button>
     );
   }
 });
 
-/* render your Timer React Component here */
+/* render your ClickCounter React Component here */
 React.render(
-  <Timer text="Time Spent on Page:" />,
-  document.getElementById('timer')
+  <ClickCounter text="Clicks" />,
+  document.getElementById('click-counter')
 );
