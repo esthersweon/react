@@ -15,15 +15,35 @@ var ClickCounter = React.createClass({
   getInitialState: function () {
     return { clicks: 0 };
   },
-  handleBtnClick: function(e) {
+  handleBtnClick: function (e) {
     e.preventDefault();
     this.setState({ clicks: this.state.clicks + 1 });
   },
-  render: function() {
+  render: function () {
     return (
-      <button className="click-counter btn btn-primary" style={ styles.text } onClick={ this.handleBtnClick }>
-        { this.props.text } <span className="badge" style={ styles.clickCount } >{ this.state.clicks }</span>
-      </button>
+      <div>
+        <button className="click-counter btn btn-primary" style={ styles.text } onClick={ this.handleBtnClick }>
+          { this.props.text } <span className="badge" style={ styles.clickCount } >{ this.state.clicks }</span>
+        </button>
+
+        <ClickedNumbers number={ this.state.clicks } />
+      </div>
+    );
+  }
+});
+
+var ClickedNumbers = React.createClass({
+  render: function () {
+    var array = [];
+
+    for (var i = 1; i <= this.props.number; i++) {
+      array.push(i);
+    }
+
+    return (
+      <div className="container">
+        { array.toString() }
+      </div>
     );
   }
 });
