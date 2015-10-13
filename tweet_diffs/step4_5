@@ -1,6 +1,6 @@
---- src/tweet_step_4.js	2015-10-06 23:48:54.000000000 -0700
-+++ src/tweet_step_5.js	2015-10-06 22:55:25.000000000 -0700
-@@ -48,11 +48,31 @@
+--- src/tweet_step_4.js	2015-10-13 02:23:21.000000000 -0700
++++ src/tweet_step_5.js	2015-10-13 02:23:12.000000000 -0700
+@@ -32,11 +32,31 @@
  });
  
  var TweetForm = React.createClass({
@@ -8,8 +8,8 @@
 +    e.preventDefault();
 +
 +    // Get new author and text from the input fields
-+    var author = React.findDOMNode(this.refs.author).value.trim();
-+    var text = React.findDOMNode(this.refs.text).value.trim();
++    var author = React.findDOMNode(this.refs.author).value;
++    var text = React.findDOMNode(this.refs.text).value;
 +
 +    // Do nothing if either input field is blank
 +    if (!text || !author) {

@@ -1,45 +1,27 @@
---- src/tweet_step_5.js	2015-10-06 22:38:15.000000000 -0700
-+++ src/tweet_step_6.js	2015-10-06 22:38:10.000000000 -0700
-@@ -17,21 +17,23 @@
+--- src/tweet_step_5.js	2015-10-13 02:23:12.000000000 -0700
++++ src/tweet_step_6.js	2015-10-13 02:22:52.000000000 -0700
+@@ -9,13 +9,13 @@
        }.bind(this)
-     });
+     );
    },
 -  // handleTweetSubmit: function (tweet) {
 -  //   // POST to add tweet to database
--  //   $.ajax({
--  //     url: this.props.url,
--  //     dataType: 'json',
--  //     type: 'POST',
--  //     data: tweet,
--  //     success: function (data) {
--  //       // Set state in step 6 of the exercise!
--  //     }.bind(this),
--  //     error: function (xhr, status, err) {
--  //       console.error(this.props.url, status, err.toString());
+-  //   $.post(this.props.url, tweet, function (data) {
+-  //       this.setState({ data: data });
 -  //     }.bind(this)
--  //   });
+-  //   );
 -  // },
 +  handleTweetSubmit: function (tweet) {
 +    // POST to add tweet to database
-+    $.ajax({
-+      url: this.props.url,
-+      dataType: 'json',
-+      type: 'POST',
-+      data: tweet,
-+      success: function (data) {
-+        this.setState({
-+          data: data
-+        });
-+      }.bind(this),
-+      error: function (xhr, status, err) {
-+        console.error(this.props.url, status, err.toString());
++    $.post(this.props.url, tweet, function (data) {
++        this.setState({ data: data });
 +      }.bind(this)
-+    });
++    );
 +  },
    componentDidMount: function () {
      // Set this.state.data to most recent set of tweets from database
      this.loadTweetsFromServer();
-@@ -40,7 +42,7 @@
+@@ -24,7 +24,7 @@
      return (
        <div className="twitter">
          <h1>Tweets</h1>
@@ -48,11 +30,11 @@
          <TweetList data={ this.state.data } />
        </div>
      );
-@@ -62,7 +64,7 @@
+@@ -46,7 +46,7 @@
  
      // Send new author and text up one level to Twitter component
      // so updated tweets can be passed down again into TweetList component
--    alert('Send tweet data to server');
+-    alert('Send tweet data; author: ' + author + ', text: ' + text);
 +    this.props.onTweetSubmit({ author: author, text: text });
  
      // Set input fields back to empty

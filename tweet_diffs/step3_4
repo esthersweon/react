@@ -1,6 +1,6 @@
---- src/tweet_step_3.js	2015-10-06 22:44:40.000000000 -0700
-+++ src/tweet_step_4.js	2015-10-06 23:48:54.000000000 -0700
-@@ -51,7 +51,9 @@
+--- src/tweet_step_3.js	2015-10-13 02:23:33.000000000 -0700
++++ src/tweet_step_4.js	2015-10-13 02:23:21.000000000 -0700
+@@ -35,7 +35,9 @@
    render: function () {
      return (
        <form className="tweetForm">

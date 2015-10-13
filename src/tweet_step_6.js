@@ -4,35 +4,17 @@ var Twitter = React.createClass({
   },
   loadTweetsFromServer: function () {
     // GET updated set of tweets from database
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      success: function (data) {
-        this.setState({
-          data: data
-        });
-      }.bind(this),
-      error: function (xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+    $.get(this.props.url, function (data) {
+        this.setState({ data: data });
       }.bind(this)
-    });
+    );
   },
   handleTweetSubmit: function (tweet) {
     // POST to add tweet to database
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      type: 'POST',
-      data: tweet,
-      success: function (data) {
-        this.setState({
-          data: data
-        });
-      }.bind(this),
-      error: function (xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+    $.post(this.props.url, tweet, function (data) {
+        this.setState({ data: data });
       }.bind(this)
-    });
+    );
   },
   componentDidMount: function () {
     // Set this.state.data to most recent set of tweets from database
@@ -54,8 +36,8 @@ var TweetForm = React.createClass({
     e.preventDefault();
 
     // Get new author and text from the input fields
-    var author = React.findDOMNode(this.refs.author).value.trim();
-    var text = React.findDOMNode(this.refs.text).value.trim();
+    var author = React.findDOMNode(this.refs.author).value;
+    var text = React.findDOMNode(this.refs.text).value;
 
     // Do nothing if either input field is blank
     if (!text || !author) {
@@ -83,12 +65,10 @@ var TweetForm = React.createClass({
 
 var TweetList = React.createClass({
   render: function () {
-    var tweetsInReverseOrder = this.props.data.reverse();
-
     return (
       <div className="tweetList">
         {
-          tweetsInReverseOrder.map(function(tweet, idx) {
+          this.props.data.map(function(tweet, idx) {
             return (
               // 'key' is a React-specific concept, but not mandatory for this tutorial
               // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children

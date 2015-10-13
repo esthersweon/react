@@ -12,31 +12,17 @@ var data = [
 var Twitter = React.createClass({
   // loadTweetsFromServer: function () {
   //   // GET updated set of tweets from database
-  //   $.ajax({
-  //     url: this.props.url,
-  //     dataType: 'json',
-  //     success: function (data) {
-  //       // Set state in step 3b of the exercise!
-  //     }.bind(this),
-  //     error: function (xhr, status, err) {
-  //       console.error(this.props.url, status, err.toString());
+  //   $.get(this.props.url, function (data) {
+  //       this.setState({ data: data });
   //     }.bind(this)
-  //   });
+  //   );
   // },
   // handleTweetSubmit: function (tweet) {
   //   // POST to add tweet to database
-  //   $.ajax({
-  //     url: this.props.url,
-  //     dataType: 'json',
-  //     type: 'POST',
-  //     data: tweet,
-  //     success: function (data) {
-  //       // Set state in step 6 of the exercise!
-  //     }.bind(this),
-  //     error: function (xhr, status, err) {
-  //       console.error(this.props.url, status, err.toString());
+  //   $.post(this.props.url, tweet, function (data) {
+  //       this.setState({ data: data });
   //     }.bind(this)
-  //   });
+  //   );
   // },
   // componentDidMount: function () {
   //   // Set this.state.data to most recent set of tweets from database
