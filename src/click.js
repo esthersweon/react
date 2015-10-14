@@ -16,23 +16,24 @@ var ClickCounter = React.createClass({
     return { clicks: 0 };
   },
   handleBtnClick: function (e) {
+    alert("You clicked the button!");
     e.preventDefault();
     this.setState({ clicks: this.state.clicks + 1 });
   },
   render: function () {
     return (
       <div>
-        <button className="click-counter btn btn-primary" style={ styles.text } onClick={ this.handleBtnClick }>
+        <button className="btn btn-primary" style={ styles.text } onClick={ this.handleBtnClick }>
           { this.props.text } <span className="badge" style={ styles.clickCount } >{ this.state.clicks }</span>
         </button>
 
-        <ClickedNumbers number={ this.state.clicks } />
+        <ClickedNums number={ this.state.clicks } />
       </div>
     );
   }
 });
 
-var ClickedNumbers = React.createClass({
+var ClickedNums = React.createClass({
   render: function () {
     var array = [];
 

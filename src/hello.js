@@ -15,7 +15,7 @@ var Hello = React.createClass({
     return (
       <div>
         <h1>{ this.props.title }</h1>
-        <div>Hello React!</div>
+        <div>Hello, React!</div>
       </div>
     )
   }
