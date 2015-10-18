@@ -1,7 +1,7 @@
 {
   "name": "react-tutorial",
   "version": "0.0.0",
-  "description": "Code from the React tutorial.",
+  "description": "CoderCourse.io React Tutorial",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.4.3",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/reactjs/react-tutorial.git"
+    "url": "https://github.com/esthersweon/react"
   },
   "keywords": [
     "react",
@@ -33,11 +33,8 @@
     "comment",
     "example"
   ],
-  "author": "petehunt",
-  "bugs": {
-    "url": "https://github.com/reactjs/react-tutorial/issues"
-  },
-  "homepage": "https://github.com/reactjs/react-tutorial",
+  "author": "esthersweon & senseiurata",
+  "homepage": "https://github.com/esthersweon/react",
   "engines": {
     "node": "0.12.x"
   }
