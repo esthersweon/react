@@ -43,7 +43,7 @@ function buildScript(watch) {
 
   bundler.on('update', function() {
     rebundle();
-    gutil.log('Rebundling..');
+    gutil.log('Rebundling Complete!');
   });
 
   return rebundle();
