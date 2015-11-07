@@ -1,5 +1,5 @@
---- src/tweet_step_2.js	2015-10-13 02:23:41.000000000 -0700
-+++ src/tweet_step_3.js	2015-10-13 02:23:33.000000000 -0700
+--- src/tweet_step_2.js	2015-11-06 18:55:58.000000000 -0800
++++ src/tweet_step_3.js	2015-10-18 15:19:36.000000000 -0700
 @@ -1,22 +1,14 @@
 -var data = [
 -  {
@@ -16,7 +16,7 @@
 -  // loadTweetsFromServer: function () {
 -  //   // GET updated set of tweets from database
 -  //   $.get(this.props.url, function (data) {
--  //       this.setState({ data: data });
+-  //       // Set state in step 3b of the exercise!
 -  //     }.bind(this)
 -  //   );
 -  // },

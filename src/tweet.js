@@ -13,7 +13,7 @@ var Twitter = React.createClass({
   // loadTweetsFromServer: function () {
   //   // GET updated set of tweets from database
   //   $.get(this.props.url, function (data) {
-  //       this.setState({ data: data });
+  //       // Set state in step 3b of the exercise!
   //     }.bind(this)
   //   );
   // },
