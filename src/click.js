@@ -16,7 +16,6 @@ var ClickCounter = React.createClass({
     return { clicks: 0 };
   },
   handleBtnClick: function (e) {
-    alert("You clicked the button!");
     e.preventDefault();
     this.setState({ clicks: this.state.clicks + 1 });
   },

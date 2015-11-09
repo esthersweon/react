@@ -27,11 +27,6 @@ body {
   border-top: 1px solid gray;
 } 
 
-.click-counter {
-  /*text-align: center;*/
-}
-
 .tweetForm {
   margin: 20px 0px;
-  overflow: hidden;
 }
