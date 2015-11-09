@@ -12,7 +12,7 @@ var Twitter = React.createClass({
   // handleTweetSubmit: function (tweet) {
   //   // POST to add tweet to database
   //   $.post(this.props.url, tweet, function (data) {
-  //       this.setState({ data: data });
+  //       // Set state in step 6b of the exercise!
   //     }.bind(this)
   //   );
   // },
