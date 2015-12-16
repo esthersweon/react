@@ -26,23 +26,17 @@ var ClickCounter = React.createClass({
           { this.props.text } <span className="badge" style={ styles.clickCount } >{ this.state.clicks }</span>
         </button>
 
-        <ClickedNums number={ this.state.clicks } />
+        <ClickCounterCaption number={ this.state.clicks } />
       </div>
     );
   }
 });
 
-var ClickedNums = React.createClass({
+var ClickCounterCaption = React.createClass({
   render: function () {
-    var array = [];
-
-    for (var i = 1; i <= this.props.number; i++) {
-      array.push(i);
-    }
-
     return (
-      <div className="container">
-        { array.toString() }
+      <div>
+        Number of Clicks: { this.props.number } 
       </div>
     );
   }
