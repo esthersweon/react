@@ -1,0 +1,4 @@
+module.exports = {
+  TWEET_CREATE: 'TWEET_CREATE',
+  TWEET_LOAD_ALL: 'TWEET_LOAD_ALL'
+};
